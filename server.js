@@ -32,7 +32,7 @@ app.use(express.static('public'));
 
 // ── Gemini Client ─────────────────────────────────────────────────────
 /** @type {GoogleGenerativeAI | null} */
-const TOKENROUTER_API_KEY = 'sk-3uQ2jElj2C2dQj3vkU6Bv2JQx8AXXFT7r0CyMXWjTIp6Efa0';
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || process.env.GEMINI_API_KEY;
 
 /**
  * Generate a structured meal plan from Gemini AI.
@@ -42,7 +42,7 @@ const TOKENROUTER_API_KEY = 'sk-3uQ2jElj2C2dQj3vkU6Bv2JQx8AXXFT7r0CyMXWjTIp6Efa0
  * @returns {Promise<object>} Parsed JSON response with plan, groceries, substitutions, and budget check.
  */
 async function generateMealPlan(schedule, budget, diet) {
-  if (!TOKENROUTER_API_KEY) {
+  if (!OPENROUTER_API_KEY) {
     return getFallbackPlan(schedule, budget, diet);
   }
 
@@ -83,21 +83,21 @@ Return ONLY valid JSON (no markdown fences, no code blocks) with this exact stru
 }
 Ensure the budget_check.within_budget is correctly calculated. Keep grocery_list concise (5-12 items). Provide 2-3 substitutions.`;
 
-    const response = await fetch('https://api.tokenrouter.com/v1/chat/completions', {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${TOKENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: 'MiniMax-M3',
+      model: 'nex-agi/nex-n2-pro:free',
       messages: [{ role: 'user', content: prompt }]
     })
   });
 
   const result = await response.json();
   if (result.error || !result.choices) {
-    console.error("TokenRouter API Error:", result);
+    console.error("OpenRouter API Error:", result);
     throw new Error(result.error?.message || "Failed to generate AI response.");
   }
   const text = result.choices[0].message.content;
