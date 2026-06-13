@@ -42,8 +42,9 @@ const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || process.env.GEMINI_
  * @returns {Promise<object>} Parsed JSON response with plan, groceries, substitutions, and budget check.
  */
 async function generateMealPlan(schedule, budget, diet) {
-  // FORCE INSTANT FALLBACK FOR FAST DEMO
-  return getFallbackPlan(schedule, budget, diet);
+  if (!OPENROUTER_API_KEY) {
+    return getFallbackPlan(schedule, budget, diet);
+  }
 
   const dietRules = diet === 'veg'
     ? 'All meals MUST be strictly vegetarian (no meat, fish, or eggs).'
