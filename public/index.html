@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chef Govu AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <h1 class="logo">🍳 Chef Govu AI</h1>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light and dark mode">
+        <span class="icon-sun" aria-hidden="true">☀️</span>
+        <span class="icon-moon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="bento-grid">
+    <!-- ── Input Panel ── -->
+    <section class="bento-card input-panel" aria-label="Meal plan input form">
+      <h2 class="card-title">Your Details</h2>
+      <form id="plan-form" class="plan-form">
+        <div class="form-group">
+          <label for="schedule-input">Daily Schedule</label>
+          <textarea
+            id="schedule-input"
+            class="form-input"
+            rows="4"
+            placeholder="e.g. Busy workday from 9-5, need quick breakfast, gym at 6pm..."
+            aria-label="Describe your daily schedule"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label id="diet-label">Dietary Preference</label>
+          <div class="diet-toggle" role="radiogroup" aria-labelledby="diet-label">
+            <input type="radio" name="diet" id="diet-veg" value="veg" checked aria-label="Vegetarian" />
+            <label for="diet-veg" class="diet-option veg">🌿 Veg</label>
+            <input type="radio" name="diet" id="diet-nonveg" value="non-veg" aria-label="Non-Vegetarian (egg is non-veg)" />
+            <label for="diet-nonveg" class="diet-option nonveg">🍗 Non-Veg</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="budget-input">Budget (₹)</label>
+          <input
+            id="budget-input"
+            type="number"
+            class="form-input"
+            placeholder="e.g. 500"
+            min="1"
+            step="1"
+            aria-label="Enter your budget in Indian rupees"
+            required
+          />
+        </div>
+        <button type="submit" class="btn-primary" aria-label="Generate meal plan">
+          <span class="btn-text">Generate Plan</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+    </section>
+
+    <!-- ── Timeline / Meal Plan ── -->
+    <section class="bento-card timeline-panel" aria-label="Daily meal plan timeline">
+      <h2 class="card-title">📋 Meal Plan</h2>
+      <div id="meal-plan" class="meal-plan">
+        <p class="placeholder-text">Your meal plan will appear here...</p>
+      </div>
+    </section>
+
+    <!-- ── Grocery List ── -->
+    <section class="bento-card grocery-panel" aria-label="Grocery list">
+      <h2 class="card-title">🛒 Grocery List</h2>
+      <ul id="grocery-list" class="grocery-list">
+        <li class="placeholder-text">Your grocery list will appear here...</li>
+      </ul>
+    </section>
+
+    <!-- ── Substitutions ── -->
+    <section class="bento-card substitutions-panel" aria-label="Ingredient substitutions">
+      <h2 class="card-title">🔄 Substitutions</h2>
+      <div id="substitutions" class="substitutions">
+        <p class="placeholder-text">Substitutions will appear here...</p>
+      </div>
+    </section>
+
+    <!-- ── Budget Tracker ── -->
+    <section class="bento-card budget-panel" aria-label="Budget tracker">
+      <h2 class="card-title">💰 Budget Tracker</h2>
+      <div id="budget-tracker" class="budget-tracker">
+        <p class="placeholder-text">Budget details will appear here...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Loading Overlay ── -->
+  <div id="loading-overlay" class="loading-overlay" role="status" aria-label="Generating meal plan" aria-live="polite" hidden>
+    <div class="loading-content">
+      <div class="spinner-ring" aria-hidden="true"></div>
+      <p class="loading-text">AI is crafting your perfect Indian meal plan...</p>
+    </div>
+  </div>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
