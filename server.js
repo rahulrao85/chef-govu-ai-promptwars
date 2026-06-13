@@ -44,7 +44,6 @@ const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || process.env.GEMINI_
 async function generateMealPlan(schedule, budget, diet) {
   // FORCE INSTANT FALLBACK FOR FAST DEMO
   return getFallbackPlan(schedule, budget, diet);
-  }
 
   const dietRules = diet === 'veg'
     ? 'All meals MUST be strictly vegetarian (no meat, fish, or eggs).'
