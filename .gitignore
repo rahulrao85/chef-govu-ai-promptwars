@@ -1,0 +1,8 @@
+node_modules/
+.env
+.DS_Store
+.gemini/
+.tempmediaStorage/
+PROMPTWARS IN PERSON/node_modules/
+PROMPTWAR_PREP.md
+PROMPTWARS_SATURDAY_PREP.md

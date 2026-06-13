@@ -1,0 +1,511 @@
+/* ── CSS Variables & Theme ────────────────────────────────────────────── */
+:root {
+  --font-family: 'Outfit', sans-serif;
+
+  /* Dark mode (default) */
+  --bg-primary: #0a0a1a;
+  --bg-secondary: #12122a;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+  --text-primary: #f0f0f5;
+  --text-secondary: #9d9dbf;
+  --text-muted: #6b6b8a;
+  --border-color: rgba(255, 255, 255, 0.06);
+  --accent: #6c63ff;
+  --accent-glow: rgba(108, 99, 255, 0.35);
+  --accent-secondary: #00d4aa;
+  --success: #34d399;
+  --danger: #f87171;
+  --warning: #fbbf24;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --card-radius: 16px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f5f5fa;
+  --bg-secondary: #e8e8f0;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-card-hover: rgba(255, 255, 255, 0.9);
+  --text-primary: #1a1a2e;
+  --text-secondary: #5a5a7a;
+  --text-muted: #8a8aaa;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --accent: #5b52e0;
+  --accent-glow: rgba(91, 82, 224, 0.25);
+  --accent-secondary: #00b894;
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Reset & Base ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.app-header {
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(16px);
+  background: var(--glass-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: var(--transition);
+  position: relative;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-card-hover);
+  transform: scale(1.05);
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+[data-theme="light"] .theme-toggle .icon-moon { display: inline; }
+
+/* ── Bento Grid ──────────────────────────────────────────────────────── */
+.bento-grid {
+  max-width: 1280px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.input-panel { grid-column: 1 / -1; }
+
+.timeline-panel {
+  grid-column: 1 / 2;
+  grid-row: span 2;
+}
+
+.grocery-panel { grid-column: 2 / 3; }
+.substitutions-panel { grid-column: 2 / 3; }
+.budget-panel { grid-column: 2 / 3; }
+
+@media (max-width: 860px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .timeline-panel,
+  .grocery-panel,
+  .substitutions-panel,
+  .budget-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Bento Card ──────────────────────────────────────────────────────── */
+.bento-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+/* ── Input Panel ─────────────────────────────────────────────────────── */
+.plan-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  transition: var(--transition);
+  resize: vertical;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+input.form-input::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
+/* ── Diet Toggle ──────────────────────────────────────────────────────── */
+.diet-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.diet-toggle input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.diet-option {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-family);
+}
+
+.diet-option:hover {
+  background: var(--bg-card-hover);
+}
+
+input[type="radio"]:checked + .diet-option {
+  border-color: var(--accent);
+  color: var(--text-primary);
+  background: var(--accent-glow);
+}
+
+input[type="radio"]:checked + .diet-option.veg {
+  border-color: var(--success);
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.2);
+}
+
+input[type="radio"]:checked + .diet-option.nonveg {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2);
+}
+
+/* ── Button ──────────────────────────────────────────────────────────── */
+.btn-primary {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary.loading .btn-text { opacity: 0.3; }
+.btn-primary.loading .btn-spinner { display: block; }
+
+.btn-spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  position: absolute;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Meal Plan Timeline ──────────────────────────────────────────────── */
+.meal-plan { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.meal-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transition: var(--transition);
+}
+
+.meal-item:hover {
+  background: var(--bg-card-hover);
+  transform: scale(1.01);
+}
+
+.meal-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.meal-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meal-label .emoji { font-size: 1.15rem; }
+
+.meal-cost {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-secondary);
+  background: rgba(0, 212, 170, 0.12);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+
+.meal-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Grocery List ────────────────────────────────────────────────────── */
+.grocery-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.grocery-list li {
+  padding: 0.6rem 1rem;
+  background: var(--bg-card);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border-left: 3px solid var(--accent);
+  transition: var(--transition);
+}
+
+.grocery-list li:hover {
+  background: var(--bg-card-hover);
+  transform: translateX(4px);
+}
+
+/* ── Substitutions ───────────────────────────────────────────────────── */
+.substitutions { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.sub-item {
+  padding: 0.65rem 1rem;
+  background: var(--bg-card);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  border-left: 3px solid var(--warning);
+  transition: var(--transition);
+}
+
+.sub-item:hover {
+  background: var(--bg-card-hover);
+  transform: translateX(4px);
+}
+
+.sub-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.sub-item .arrow {
+  color: var(--warning);
+  margin: 0 0.25rem;
+}
+
+/* ── Budget Tracker ──────────────────────────────────────────────────── */
+.budget-tracker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.budget-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.budget-row .label { color: var(--text-secondary); }
+.budget-row .value { font-weight: 600; }
+
+.budget-row.total-row {
+  border-top: 1px solid var(--border-color);
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+  font-size: 1rem;
+}
+
+.budget-status {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.budget-status.within {
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.budget-status.exceeded {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--danger);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+}
+
+/* ── Placeholder ─────────────────────────────────────────────────────── */
+.placeholder-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ── Loading Overlay ─────────────────────────────────────────────────── */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.spinner-ring {
+  width: 56px;
+  height: 56px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+.loading-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ── Animations ──────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
+}

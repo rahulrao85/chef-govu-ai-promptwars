@@ -1,0 +1,47 @@
+Published using Google Docs
+Report abuseLearn more
+[PUB]How to Make a Submission?
+Updated automatically every 5 minutes
+Tab 1
+
+Prerequisites
+Before submitting, ensure the following:
+
+Your desired AI platform is downloaded and set up
+Git is installed and configured on your system
+ → Refer: Set up Git
+You have an active GitHub account
+ → If you want to create a new account, refer to: Create a GitHub Account
+
+Important Rules
+You have a maximum of 3 submission attempts
+The repository size must be less than 10 MB
+The GitHub repository must be public
+The repository should contain only one branch (no multiple branches allowed)
+
+Steps to Make a Submission
+Go to GitHub and create a new repository
+How to guide refer: Creating a new repository - GitHub Docs 
+Ensure the repository is public
+Open the desired AI platform
+
+Clone the GitHub repository inside AI platform
+
+Start prompting and coding using your AI platform
+
+Once satisfied with your progress:
+Push your code to the GitHub repository
+Ensure there are no multiple branches (all work should be in a single branch)
+After pushing the code:
+Copy the public GitHub repository link
+Log in to the Hack2skill Portal (Link)
+
+Navigate to the Prompt Wars Dashboard
+
+
+Go to the Submissions Tab
+
+
+
+10. Scroll down slightly to see the submission fields and the submit button
+
