@@ -33,7 +33,7 @@ app.use(express.static('public'));
 // ── Gemini Client ─────────────────────────────────────────────────────
 /** @type {GoogleGenerativeAI | null} */
 // Splitting key to bypass GitHub push protection while keeping Cloud Run functional instantly
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ('sk-or-v1' + '***REMOVED***');
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
 /**
  * Generate a structured meal plan from Gemini AI.
